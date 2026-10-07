@@ -1,0 +1,14 @@
+services:
+  filebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser:latest
+    restart: unless-stopped
+    user: 1000:1000
+    ports:
+      - ${FILEBROWSER_PORT_WEB}:80
+    environment:
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${STORAGE_MOUNT}:/srv/hdd
+      - ${DOCKER_ROOT}/filebrowser/config/database.db:/database.db
+      - ${DOCKER_ROOT}/filebrowser/config/.filebrowser.json:/.filebrowser.json

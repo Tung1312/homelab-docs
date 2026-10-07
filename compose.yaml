@@ -1,0 +1,8 @@
+include:
+  - docker/adguard/docker-compose.yml
+  - docker/cloudflared/docker-compose.yml
+  - docker/filebrowser/docker-compose.yml
+  - docker/homepage/docker-compose.yml
+  - docker/portainer/docker-compose.yml
+  - docker/speedtest-tracker/docker-compose.yml
+  - docker/vaultwarden/docker-compose.yml

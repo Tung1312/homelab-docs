@@ -1,0 +1,12 @@
+# Real environment values (host paths, secrets, IPs)
+.env
+*.env
+!.env.example
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

@@ -1,0 +1,13 @@
+services:
+  adguardhome:
+    container_name: adguardhome
+    image: adguard/adguardhome:latest
+    restart: unless-stopped
+    ports:
+      - ${ADGUARD_PORT_DNS}:53/tcp
+      - ${ADGUARD_PORT_DNS}:53/udp
+      - ${ADGUARD_PORT_SETUP}:3000/tcp
+      - ${ADGUARD_PORT_WEB}:80/tcp
+    volumes:
+      - ${DOCKER_ROOT}/adguard/work:/opt/adguardhome/work
+      - ${DOCKER_ROOT}/adguard/conf:/opt/adguardhome/conf

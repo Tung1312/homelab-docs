@@ -1,0 +1,12 @@
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    restart: always
+    ports:
+      - ${VAULTWARDEN_PORT_WEB}:80
+    volumes:
+      - ${DOCKER_ROOT}/vw-data:/data
+    environment:
+      - SIGNUPS_ALLOWED=false
+      - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
