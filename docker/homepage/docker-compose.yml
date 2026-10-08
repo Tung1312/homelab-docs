@@ -3,6 +3,8 @@ services:
     container_name: homepage
     image: ghcr.io/gethomepage/homepage:latest
     restart: unless-stopped
+    env_file:
+      - ../../.env
     ports:
       - ${HOMEPAGE_PORT_WEB}:3000
     volumes:
@@ -11,4 +13,4 @@ services:
       - ${STORAGE_MOUNT}:/mnt/Storage:ro
       - ${BACKUP_MOUNT}:/mnt/Backup:ro
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=*
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}

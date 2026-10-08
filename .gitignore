@@ -9,4 +9,5 @@ Thumbs.db
 *.swp
 *~
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json

@@ -3,6 +3,7 @@ include:
   - docker/cloudflared/docker-compose.yml
   - docker/filebrowser/docker-compose.yml
   - docker/homepage/docker-compose.yml
+  - docker/nginx/docker-compose.yaml
   - docker/portainer/docker-compose.yml
   - docker/speedtest-tracker/docker-compose.yml
   - docker/vaultwarden/docker-compose.yml
