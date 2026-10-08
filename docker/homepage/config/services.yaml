@@ -1,0 +1,196 @@
+- Group Main:
+   - Network:
+        - Speedtest:
+            icon: myspeed.png
+            href:
+            widget:
+              type: speedtest
+              url: {{HOMEPAGE_VAR_SPEEDTEST_URL}}
+              version: 1
+              bitratePrecision: 2
+        - Group C:
+            - Cloudflared:
+                icon: cloudflare.png
+                href:
+                ping: 1.1.1.1
+                widget:
+                  type: cloudflared
+                  fields: ["status"]
+                  accountid: {{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNT_ID}}
+                  tunnelid: {{HOMEPAGE_VAR_CLOUDFLARED_TUNNEL_ID}}
+                  key: {{HOMEPAGE_VAR_CLOUDFLARED_KEY}}
+            - Nginx:
+                icon: nginx-proxy-manager.png
+                href:
+                widget:
+                  type: npm
+                  fields: ["enabled", "disabled"]
+                  url: {{HOMEPAGE_VAR_NPM_URL}}
+                  username: {{HOMEPAGE_VAR_NPM_USERNAME}}
+                  password: {{HOMEPAGE_VAR_NPM_PASSWORD}}
+        - Adguard Home:
+            icon: adguard-home.png
+            href:
+            widget:
+              type: adguard
+              fields: ["queries", "blocked", "latency"]
+              url: {{HOMEPAGE_VAR_ADGUARD_URL}}
+              username: {{HOMEPAGE_VAR_ADGUARD_USERNAME}}
+              password: {{HOMEPAGE_VAR_ADGUARD_PASSWORD}}
+    - System:
+        - Portainer:
+            icon: portainer-alt.png
+            href:
+            siteMonitor:
+            statusStyle: dot
+            widget:
+              type: portainer
+              fields: ["running", "stopped"]
+              url: {{HOMEPAGE_VAR_PORTAINER_URL}}
+              env: 3
+              key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
+        - Group A:
+            - Crafty Controller:
+                icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/crafty-controller.png
+                href:
+            - Odysseus:
+                icon: odysseus.png
+                href:
+            - File Browser:
+                icon: filebrowser.png
+                href:
+            - Beszel:
+                icon: beszel.png
+                href:
+            - Tailscale:
+                icon: tailscale.png
+                href:
+            - Vaultwarden:
+                icon: vaultwarden.png
+                href:
+            - Jellyfin Public:
+                icon: jellyfin-vue.png
+                href:
+                ping:
+            - Jellyseerr:
+                icon: jellyseerr.png
+                href:
+                ping:
+    - Applications:
+        - Jellyfin:
+            icon: jellyfin.png
+            href:
+            siteMonitor:
+            statusStyle: dot
+            widget:
+              type: jellyfin
+              fields: ["movies", "series", "episodes"]
+              url: {{HOMEPAGE_VAR_JELLYFIN_URL}}
+              key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
+              version: 2
+              enableBlocks: true
+              enableNowPlaying: false
+              enableUser: false
+              enableMediaControl: false
+              showEpisodeNumber: true
+              expandOneStreamToTwoRows: false
+        - Nextcloud:
+            icon: nextcloud.png
+            href:
+            siteMonitor:
+            statusStyle: dot
+            widget:
+              type: nextcloud
+              fields: ["cpuload", "memoryusage", "numfiles"]
+              url: {{HOMEPAGE_VAR_NEXTCLOUD_URL}}
+              username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
+              password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+        - Immich:
+            icon: immich.png
+            href:
+            siteMonitor:
+            statusStyle: dot
+            widget:
+              type: immich
+              fields: ["photos", "videos", "storage"]
+              url: {{HOMEPAGE_VAR_IMMICH_URL}}
+              key: {{HOMEPAGE_VAR_IMMICH_KEY}}
+              version: 2
+
+- Media Automation:
+    - Group MA 1:
+        - Jellystat:
+            icon: jellystat.png
+            href:
+        - Bazarr:
+            icon: bazarr.png
+            href:
+        - Prowlarr:
+            icon: prowlarr.png
+            href:
+        - JDownloader:
+            icon: jdownloader.png
+            href:
+    - Group MA 2:
+        - qBittorrent:
+            icon: qbittorrent.png
+            href:
+            widget:
+              type: qbittorrent
+              url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+        - Sonarr:
+            icon: sonarr.png
+            href:
+            widget:
+              type: sonarr
+              url: {{HOMEPAGE_VAR_SONARR_URL}}
+              key: {{HOMEPAGE_VAR_SONARR_KEY}}
+        - Radarr:
+            icon: radarr.png
+            href:
+            widget:
+              type: radarr
+              url: {{HOMEPAGE_VAR_RADARR_URL}}
+              key: {{HOMEPAGE_VAR_RADARR_KEY}}
+    - Group MA 3:
+        - MA Sub 1:
+          - Calendar:
+              icon: mdi-calendar-month-outline.svg
+              widget:
+                type: calendar
+                view: monthly
+                maxEvents: 10
+                showTime: true
+                integrations:
+                  - type: sonarr
+                    service_group: Group MA 2
+                    service_name: Sonarr
+                  - type: radarr
+                    service_group: Group MA 2
+                    service_name: Radarr
+        - MA Sub 2:
+          - Downloading:
+              icon: mdi-download-circle-outline.svg
+              widget:
+                type: qbittorrent
+                fields: []
+                url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+                username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+                password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+                enableLeechProgress: true
+                enableLeechSize: true
+          - Now Playing:
+              icon: mdi-radio-tower.svg
+              widget:
+                type: jellyfin
+                url: {{HOMEPAGE_VAR_JELLYFIN_URL}}
+                key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
+                version: 2
+                enableBlocks: false
+                enableNowPlaying: true
+                enableUser: true
+                enableMediaControl: false
+                showEpisodeNumber: true
+                expandOneStreamToTwoRows: false
