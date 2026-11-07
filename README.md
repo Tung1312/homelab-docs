@@ -50,3 +50,14 @@ public tunnel.
 `Homepage` · `Beszel` · `Uptime Kuma`
 
 Service dashboard, system metrics, and uptime monitoring.
+
+## Screenshots
+
+### Homepage Dashboard
+![Homepage dashboard](assets/photos/homepage-2026-11-07-16_37_23.png)
+
+### Beszel System Monitor
+![Beszel system monitor](assets/photos/monitor-2026-11-07-16_40_12.png)
+
+### AdGuard Dashboard
+![AdGuard Home dashboard](assets/photos/dns-2026-11-07-16_41_35.png)
