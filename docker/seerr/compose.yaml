@@ -1,0 +1,12 @@
+services:
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DOCKER_ROOT}/seerr:/app/config
+    ports:
+      - ${SEERR_PORT_WEB}:5055
+    restart: unless-stopped
