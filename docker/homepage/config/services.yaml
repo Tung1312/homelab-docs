@@ -1,92 +1,140 @@
-- Group Main:
-   - Network:
-        - Speedtest:
-            icon: myspeed.png
-            href:
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+# ---------------------------------------------------------------------------
+# SERVER STATS  (live graphs from Glances)
+# ---------------------------------------------------------------------------
+- Server Stats:
+    - Stats Row 1:
+        - CPU:
+            icon: mdi-cpu-64-bit
             widget:
-              type: speedtest
-              url: {{HOMEPAGE_VAR_SPEEDTEST_URL}}
-              version: 1
-              bitratePrecision: 2
-        - Group C:
-            - Cloudflared:
-                icon: cloudflare.png
-                href:
-                ping: 1.1.1.1
-                widget:
-                  type: cloudflared
-                  fields: ["status"]
-                  accountid: {{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNT_ID}}
-                  tunnelid: {{HOMEPAGE_VAR_CLOUDFLARED_TUNNEL_ID}}
-                  key: {{HOMEPAGE_VAR_CLOUDFLARED_KEY}}
-            - Nginx:
-                icon: nginx-proxy-manager.png
-                href:
-                widget:
-                  type: npm
-                  fields: ["enabled", "disabled"]
-                  url: {{HOMEPAGE_VAR_NPM_URL}}
-                  username: {{HOMEPAGE_VAR_NPM_USERNAME}}
-                  password: {{HOMEPAGE_VAR_NPM_PASSWORD}}
-        - Adguard Home:
-            icon: adguard-home.png
-            href:
+              type: glances
+              url:
+              version: 4
+              metric: cpu
+        - RAM:
+            icon: mdi-memory
             widget:
-              type: adguard
-              fields: ["queries", "blocked", "latency"]
-              url: {{HOMEPAGE_VAR_ADGUARD_URL}}
-              username: {{HOMEPAGE_VAR_ADGUARD_USERNAME}}
-              password: {{HOMEPAGE_VAR_ADGUARD_PASSWORD}}
-    - System:
+              type: glances
+              url:
+              version: 4
+              metric: memory
+        - Temp:
+            icon: mdi-thermometer
+            widget:
+              type: glances
+              url:
+              version: 4
+              metric: "sensor:Package id 0"
+    - Stats Row 2:
+        - Network:
+            icon: mdi-lan
+            widget:
+              type: glances
+              url:
+              version: 4
+              metric: network:enp2s0
+        - Disk I/O:
+            icon: mdi-swap-vertical
+            widget:
+              type: glances
+              url:
+              version: 4
+              metric: disk:sdb
+        - Storage:
+            icon: mdi-harddisk
+            widget:
+              type: glances
+              url:
+              version: 4
+              metric: fs:/mnt/Storage
+        - Backup:
+            icon: mdi-backup-restore
+            widget:
+              type: glances
+              url:
+              version: 4
+              metric: fs:/mnt/Backup
+
+# ---------------------------------------------------------------------------
+# INFRASTRUCTURE
+# ---------------------------------------------------------------------------
+- Infrastructure:
+    - Infra Row 1:
         - Portainer:
             icon: portainer-alt.png
             href:
+            description: Docker manager
             siteMonitor:
             statusStyle: dot
             widget:
               type: portainer
               fields: ["running", "stopped"]
-              url: {{HOMEPAGE_VAR_PORTAINER_URL}}
+              url:
               env: 3
-              key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
-        - Group A:
-            - Crafty Controller:
-                icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/crafty-controller.png
-                href:
-            - Odysseus:
-                icon: odysseus.png
-                href:
-            - File Browser:
-                icon: filebrowser.png
-                href:
-            - Beszel:
-                icon: beszel.png
-                href:
-            - Tailscale:
-                icon: tailscale.png
-                href:
-            - Vaultwarden:
-                icon: vaultwarden.png
-                href:
-            - Jellyfin Public:
-                icon: jellyfin-vue.png
-                href:
-                ping:
-            - Jellyseerr:
-                icon: jellyseerr.png
-                href:
-                ping:
-    - Applications:
+              key:
+        - Nginx:
+            icon: nginx-proxy-manager.png
+            href:
+            description: Reverse proxy
+            widget:
+              type: npm
+              fields: ["enabled", "disabled"]
+              url:
+              username:
+              password:
+        - AdGuard Home:
+            icon: adguard-home.png
+            href:
+            description: DNS & adblock
+            widget:
+              type: adguard
+              fields: ["queries", "blocked", "latency"]
+              url:
+              username:
+              password:
+        - Cloudflared:
+            icon: cloudflare.png
+            href:
+            description: Cloudflare tunnel
+            ping: 1.1.1.1
+            widget:
+              type: cloudflared
+              fields: ["status"]
+              accountid:
+              tunnelid:
+              key:
+    - Infra Row 2:
+        - Beszel:
+            icon: beszel.png
+            href:
+            description: System monitor
+        - Uptime Kuma:
+            icon: uptime-kuma.png
+            href:
+            description: Uptime monitor
+        - Tailscale:
+            icon: tailscale.png
+            href:
+            description: Mesh VPN
+
+# ---------------------------------------------------------------------------
+# APPLICATIONS
+# ---------------------------------------------------------------------------
+- Applications:
+    - Apps Row 1:
         - Jellyfin:
             icon: jellyfin.png
             href:
+            description: Media server
             siteMonitor:
             statusStyle: dot
             widget:
               type: jellyfin
               fields: ["movies", "series", "episodes"]
-              url: {{HOMEPAGE_VAR_JELLYFIN_URL}}
-              key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
+              url:
+              key:
               version: 2
               enableBlocks: true
               enableNowPlaying: false
@@ -94,103 +142,143 @@
               enableMediaControl: false
               showEpisodeNumber: true
               expandOneStreamToTwoRows: false
-        - Nextcloud:
-            icon: nextcloud.png
+        - Seerr:
+            icon: seerr.png
             href:
+            description: Media requests
             siteMonitor:
             statusStyle: dot
             widget:
-              type: nextcloud
-              fields: ["cpuload", "memoryusage", "numfiles"]
-              url: {{HOMEPAGE_VAR_NEXTCLOUD_URL}}
-              username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
-              password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+              type: seerr
+              url:
+              key:
+              fields: ["pending", "approved", "available"]
         - Immich:
             icon: immich.png
             href:
+            description: Photos & videos
             siteMonitor:
             statusStyle: dot
             widget:
               type: immich
               fields: ["photos", "videos", "storage"]
-              url: {{HOMEPAGE_VAR_IMMICH_URL}}
-              key: {{HOMEPAGE_VAR_IMMICH_KEY}}
+              url:
+              key:
               version: 2
+        - Nextcloud:
+            icon: nextcloud.png
+            href:
+            description: Cloud storage
+            siteMonitor:
+            statusStyle: dot
+            widget:
+              type: nextcloud
+              fields: ["cpuload", "memoryusage", "numfiles"]
+              url:
+              username:
+              password:
+    - Apps Row 2:
+        - Vaultwarden:
+            icon: vaultwarden.png
+            href:
+            description: Password vault
+        - File Browser:
+            icon: filebrowser.png
+            href:
+            description: File manager
+        - Crafty:
+            icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/crafty-controller.png
+            href:
+            description: Minecraft server
 
-- Media Automation:
-    - Group MA 1:
-        - Jellystat:
-            icon: jellystat.png
-            href:
-        - Bazarr:
-            icon: bazarr.png
-            href:
-        - Prowlarr:
-            icon: prowlarr.png
-            href:
-        - JDownloader:
-            icon: jdownloader.png
-            href:
-    - Group MA 2:
+# ---------------------------------------------------------------------------
+# MEDIA
+# ---------------------------------------------------------------------------
+- Media:
+    - Media Row 1:
         - qBittorrent:
             icon: qbittorrent.png
             href:
+            description: Torrent client
             widget:
               type: qbittorrent
-              url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
-              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+              url:
+              username:
+              password:
         - Sonarr:
             icon: sonarr.png
             href:
+            description: TV series
             widget:
               type: sonarr
-              url: {{HOMEPAGE_VAR_SONARR_URL}}
-              key: {{HOMEPAGE_VAR_SONARR_KEY}}
+              url:
+              key:
         - Radarr:
             icon: radarr.png
             href:
+            description: Movies
             widget:
               type: radarr
-              url: {{HOMEPAGE_VAR_RADARR_URL}}
-              key: {{HOMEPAGE_VAR_RADARR_KEY}}
-    - Group MA 3:
-        - MA Sub 1:
-          - Calendar:
-              icon: mdi-calendar-month-outline.svg
-              widget:
-                type: calendar
-                view: monthly
-                maxEvents: 10
-                showTime: true
-                integrations:
-                  - type: sonarr
-                    service_group: Group MA 2
-                    service_name: Sonarr
-                  - type: radarr
-                    service_group: Group MA 2
-                    service_name: Radarr
-        - MA Sub 2:
-          - Downloading:
-              icon: mdi-download-circle-outline.svg
-              widget:
-                type: qbittorrent
-                fields: []
-                url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
-                username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-                password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
-                enableLeechProgress: true
-                enableLeechSize: true
-          - Now Playing:
-              icon: mdi-radio-tower.svg
-              widget:
-                type: jellyfin
-                url: {{HOMEPAGE_VAR_JELLYFIN_URL}}
-                key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
-                version: 2
-                enableBlocks: false
-                enableNowPlaying: true
-                enableUser: true
-                enableMediaControl: false
-                showEpisodeNumber: true
-                expandOneStreamToTwoRows: false
+              url:
+              key:
+    - Media Row 2:
+        - Jellystat:
+            icon: jellystat.png
+            href:
+            description: Jellyfin stats
+        - Bazarr:
+            icon: bazarr.png
+            href:
+            description: Subtitles
+        - Prowlarr:
+            icon: prowlarr.png
+            href:
+            description: Indexers
+        - JDownloader:
+            icon: jdownloader.png
+            href:
+            description: Downloads
+
+# ---------------------------------------------------------------------------
+# MEDIA WIDGETS
+# ---------------------------------------------------------------------------
+- Media Widgets:
+    - Schedule:
+        - Calendar:
+            icon: mdi-calendar-month-outline
+            widget:
+              type: calendar
+              view: monthly
+              maxEvents: 10
+              showTime: true
+              integrations:
+                - type: sonarr
+                  service_group: Media Row 1
+                  service_name: Sonarr
+                - type: radarr
+                  service_group: Media Row 1
+                  service_name: Radarr
+    - Live:
+        - Now Playing:
+            icon: mdi-radio-tower
+            widget:
+              type: jellyfin
+              url:
+              key:
+              version: 2
+              enableBlocks: false
+              enableNowPlaying: true
+              enableUser: true
+              enableMediaControl: false
+              showEpisodeNumber: true
+              expandOneStreamToTwoRows: false
+        - Downloading:
+            icon: mdi-download-circle-outline
+            widget:
+              type: qbittorrent
+              fields: []
+              url:
+              username:
+              password:
+              enableLeechProgress: true
+              enableLeechSize: true

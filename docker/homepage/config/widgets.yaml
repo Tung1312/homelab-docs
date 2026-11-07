@@ -3,27 +3,6 @@
 # https://gethomepage.dev/latest/configs/service-widgets
 
 - resources:
-    label: System
-    cpu: true
-    memory: true
-#    disk:
-#      - /
-
-- resources:
-    label: Storage
-    expanded: true
-    disk:
-      - /mnt/Storage
-
-- resources:
-    label: Backup
-    expanded: true
-    disk:
-      - /mnt/Backup
-
-- resources:
-    label: Monitor
-    cputemp: true
     uptime: true
 
 - datetime:
