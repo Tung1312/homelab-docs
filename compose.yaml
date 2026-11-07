@@ -1,9 +1,19 @@
 include:
   - docker/adguard/compose.yaml
+  - docker/bazarr/compose.yaml
   - docker/cloudflared/compose.yaml
   - docker/filebrowser/compose.yaml
   - docker/homepage/compose.yaml
+  - docker/jellyfin/compose.yaml
+  - docker/jellystat/compose.yaml
   - docker/nginx/compose.yaml
+  - docker/nextcloud/compose.yaml
   - docker/portainer/compose.yaml
+  - docker/prowlarr/compose.yaml
+  - docker/qbittorrent/compose.yaml
+  - docker/radarr/compose.yaml
+  - docker/seerr/compose.yaml
+  - docker/sonarr/compose.yaml
   - docker/speedtest-tracker/compose.yaml
+  - docker/uptime-kuma/compose.yaml
   - docker/vaultwarden/compose.yaml
